@@ -10,10 +10,11 @@ export (float) var rotation_speed = 1.5
 
 export (PackedScene) var standard_cannon_laser
 
-export var cannon_ball_launch_speed = 1800
+export var cannon_ball_launch_speed = 300
 export var cannon_ball_spread_min = -300.0
 export var cannon_ball_spread_max = 300.0
 
+var motion = Vector2()
 var velocity = Vector2()
 var rotation_dir = 0
 
@@ -27,21 +28,21 @@ var can_fire_right = true
 
 func get_movement_input():
     rotation_dir = 0
-    velocity = Vector2()
+    motion = Vector2()
     if Input.is_action_pressed("RightP%s" % player_id):
         rotation_dir += 1
     if Input.is_action_pressed("LeftP%s" % player_id):
         rotation_dir -= 1
     if Input.is_action_pressed("downP%s" % player_id):
-        velocity = Vector2(-speed, 0).rotated(rotation)
+        motion = Vector2(-speed, 0).rotated(rotation)
     if Input.is_action_pressed("upP%s" % player_id):
-        velocity = Vector2(speed, 0).rotated(rotation)
+        motion = Vector2(speed, 0).rotated(rotation)
 
 
 func _physics_process(delta):
     get_movement_input()
     rotation += rotation_dir * rotation_speed * delta
-    velocity = move_and_slide(velocity)
+    motion = move_and_slide(motion)
 
 
 func _input(event):
@@ -60,8 +61,9 @@ func fire_cannon_left_side():
 	var target = $FireBroadsideLeft/FireBroadsideLeftTarget.global_position
 	var cannon_ball_instance = standard_cannon_laser.instance()
 	cannon_ball_instance.position = $FireBroadsideLeft.global_position
+	velocity = (target - broadside_left.global_position).normalized() * cannon_ball_launch_speed
 	randomize()
-	cannon_ball_instance.launch(velocity.x + int(rand_range (cannon_ball_spread_min,cannon_ball_spread_max)),velocity.y)
+	cannon_ball_instance.launch(velocity.x ,velocity.y)
 	cannon_ball_instance.look_at(target)
 	Global.Level_Node.add_child(cannon_ball_instance)
 	
@@ -75,8 +77,9 @@ func fire_cannon_right_side():
 	var target = $FireBroadsideRight/FireBroadsideRightTarget.global_position
 	var cannon_ball_instance = standard_cannon_laser.instance()
 	cannon_ball_instance.position = $FireBroadsideRight.global_position
+	velocity = (target - broadside_right.global_position).normalized() * cannon_ball_launch_speed
 	randomize()
-	cannon_ball_instance.launch(velocity.x + int(rand_range (cannon_ball_spread_min,cannon_ball_spread_max)),velocity.y)
+	cannon_ball_instance.launch(velocity.x ,velocity.y)
 	cannon_ball_instance.look_at(target)
 	Global.Level_Node.add_child(cannon_ball_instance)
 	

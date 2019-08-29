@@ -179,7 +179,7 @@ position = Vector2( 0, -14 )
 
 [node name="FireBroadsideLeftTarget" type="Position2D" parent="FireBroadsideLeft"]
 modulate = Color( 0.0313726, 1, 0, 1 )
-position = Vector2( 0, -10 )
+position = Vector2( 0, -50 )
 
 [node name="ShotsFired" type="AnimatedSprite" parent="FireBroadsideLeft"]
 visible = false
@@ -193,7 +193,7 @@ position = Vector2( 0, 14 )
 
 [node name="FireBroadsideRightTarget" type="Position2D" parent="FireBroadsideRight"]
 modulate = Color( 0.0313726, 1, 0, 1 )
-position = Vector2( 0, 10 )
+position = Vector2( 0, 50 )
 
 [node name="ShotsFired2" type="AnimatedSprite" parent="FireBroadsideRight"]
 visible = false

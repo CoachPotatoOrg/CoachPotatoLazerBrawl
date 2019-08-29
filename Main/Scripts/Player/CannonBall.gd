@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 export var damage = 10
+export var launch_speed = 300
+
+export(float) var _speed
 
 var bounces = 0
 export var bounce_limit = 2
