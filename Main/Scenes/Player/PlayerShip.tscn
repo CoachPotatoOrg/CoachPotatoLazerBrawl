@@ -258,9 +258,11 @@ playing = true
 flip_v = true
 
 [node name="CooldownLeftSide" type="Timer" parent="."]
+wait_time = 0.75
 one_shot = true
 
 [node name="CooldownRightSide" type="Timer" parent="."]
+wait_time = 0.75
 one_shot = true
 
 [node name="ShipAnims" type="AnimationPlayer" parent="."]

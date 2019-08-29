@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="BounceBlockTriangle" type="Node2D" groups=[
+"bounceblock",
+]]
+modulate = Color( 0, 0.835294, 1, 0.392157 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.286275, 1, 0.917647, 1 )
+polygon = PoolVector2Array( 0, 0, 0, 32, 32, 32 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"bounceblock",
+]]
+collision_layer = 8
+collision_mask = 48
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 0, 0, 0, 32, 32, 32, 0, 0 )
