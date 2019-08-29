@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal death
+
 export var player_id = 1
 
 export var health = 100
@@ -119,5 +121,6 @@ func take_damage(damage_to_take):
 
 
 func destroy():
+	emit_signal("death")
 	has_input = false
 	$ShipAnims.play("death")
