@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/explosion_large_01.wav-0726d23523674c790a9b877fcc29c75f.sample"
+
+[deps]
+
+source_file="res://Audio/Guns n Explo/explosion_large_01.wav"
+dest_files=[ "res://.import/explosion_large_01.wav-0726d23523674c790a9b877fcc29c75f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/weapon_cannon_shot_03.wav-ef912ad9ce141884464abfe67e67a707.sample"
+
+[deps]
+
+source_file="res://Audio/Guns n Explo/weapon_cannon_shot_03.wav"
+dest_files=[ "res://.import/weapon_cannon_shot_03.wav-ef912ad9ce141884464abfe67e67a707.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

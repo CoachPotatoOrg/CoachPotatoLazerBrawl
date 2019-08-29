@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-export var bullet_speed = 100
 export var damage = 10
 
 var bounces = 0
@@ -14,6 +13,11 @@ var collider
 var collision_point
 
 export (PackedScene) var hit_explosion
+
+
+func launch(launch_X,launch_Y):
+	motion.x = launch_X
+	motion.y = launch_Y
 
 
 func check_bounces():

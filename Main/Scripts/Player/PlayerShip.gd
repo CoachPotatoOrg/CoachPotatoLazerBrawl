@@ -10,6 +10,10 @@ export (float) var rotation_speed = 1.5
 
 export (PackedScene) var standard_cannon_laser
 
+export var cannon_ball_launch_speed = 1800
+export var cannon_ball_spread_min = -300.0
+export var cannon_ball_spread_max = 300.0
+
 var velocity = Vector2()
 var rotation_dir = 0
 
@@ -18,9 +22,10 @@ var friction = 0.2
 onready var broadside_left = $FireBroadsideLeft
 onready var broadside_right = $FireBroadsideRight
 
-var can_fire = true
+var can_fire_left = true
+var can_fire_right = true
 
-func get_input():
+func get_movement_input():
     rotation_dir = 0
     velocity = Vector2()
     if Input.is_action_pressed("RightP%s" % player_id):
@@ -34,10 +39,53 @@ func get_input():
 
 
 func _physics_process(delta):
-    get_input()
+    get_movement_input()
     rotation += rotation_dir * rotation_speed * delta
     velocity = move_and_slide(velocity)
 
 
+func _input(event):
+	if Input.is_action_just_pressed("fire_leftP%s" % player_id):
+		if can_fire_left:
+			fire_cannon_left_side()
+	if Input.is_action_just_pressed("fire_rightP%s" % player_id):
+		if can_fire_right:
+			fire_cannon_right_side()
+
+
 func fire_cannon_left_side():
-	pass
+	can_fire_left = false
+	
+	var target = $FireBroadsideLeft/FireBroadsideLeftTarget.global_position
+	var cannon_ball_instance = standard_cannon_laser.instance()
+	cannon_ball_instance.position = $FireBroadsideLeft.global_position
+	randomize()
+	cannon_ball_instance.launch(velocity.x + int(rand_range (cannon_ball_spread_min,cannon_ball_spread_max)),velocity.y)
+	cannon_ball_instance.look_at(target)
+	Global.Level_Node.add_child(cannon_ball_instance)
+	
+	$CooldownLeftSide.start()
+
+
+func fire_cannon_right_side():
+	can_fire_right = false
+	
+	var target = $FireBroadsideRight/FireBroadsideRightTarget.global_position
+	var cannon_ball_instance = standard_cannon_laser.instance()
+	cannon_ball_instance.position = $FireBroadsideRight.global_position
+	randomize()
+	cannon_ball_instance.launch(velocity.x + int(rand_range (cannon_ball_spread_min,cannon_ball_spread_max)),velocity.y)
+	cannon_ball_instance.look_at(target)
+	Global.Level_Node.add_child(cannon_ball_instance)
+	
+	$CooldownLeftSide.start()
+
+
+func _on_CooldownLeftSide_timeout():
+	can_fire_left = true
+	print("canfireleft", can_fire_left)
+
+
+func _on_CooldownRightSide_timeout():
+	can_fire_right = true
+	print("canfireleft", can_fire_right)

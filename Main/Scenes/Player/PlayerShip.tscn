@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Player/PlayerShip.gd" type="Script" id=1]
-[ext_resource path="res://Resources/SpriteFrames/ShipSpriteFrames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scenes/Bullets/CannonBallP1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/SpriteFrames/ShipSpriteFrames.tres" type="SpriteFrames" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -9,10 +10,11 @@ height = 22.0
 
 [node name="Player1Ship" type="KinematicBody2D"]
 script = ExtResource( 1 )
+standard_cannon_laser = ExtResource( 2 )
 
 [node name="AnimSprite" type="AnimatedSprite" parent="."]
 rotation = 1.5708
-frames = ExtResource( 2 )
+frames = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -22,12 +24,22 @@ shape = SubResource( 1 )
 modulate = Color( 0.0313726, 1, 0, 1 )
 position = Vector2( 0, -14 )
 
+[node name="FireBroadsideLeftTarget" type="Position2D" parent="FireBroadsideLeft"]
+modulate = Color( 0.0313726, 1, 0, 1 )
+position = Vector2( 0, -10 )
+
 [node name="FireBroadsideRight" type="Position2D" parent="."]
 modulate = Color( 0.0313726, 1, 0, 1 )
 position = Vector2( 0, 14 )
+
+[node name="FireBroadsideRightTarget" type="Position2D" parent="FireBroadsideRight"]
+modulate = Color( 0.0313726, 1, 0, 1 )
+position = Vector2( 0, 10 )
 
 [node name="CooldownLeftSide" type="Timer" parent="."]
 one_shot = true
 
 [node name="CooldownRightSide" type="Timer" parent="."]
 one_shot = true
+[connection signal="timeout" from="CooldownLeftSide" to="." method="_on_CooldownLeftSide_timeout"]
+[connection signal="timeout" from="CooldownRightSide" to="." method="_on_CooldownRightSide_timeout"]
