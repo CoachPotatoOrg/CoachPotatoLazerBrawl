@@ -1,3 +1,10 @@
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Mono-specific ignores
+.mono/
 
 Main/GFX/waves/wave5.png.import
 Main/GFX/waves/wave4.png.import
@@ -20,7 +27,6 @@ Main/GFX/Explosion/exp3.png.import
 Main/GFX/Explosion/exp2.png.import
 Main/GFX/Explosion/exp1.png.import
 Main/GFX/CanonBall.png.import
-Main/default_env.tres
 Main/.import/wave5.png-61e0a5fdf5d471080429deb02210ab3b.stex
 Main/.import/wave5.png-61e0a5fdf5d471080429deb02210ab3b.md5
 Main/.import/wave4.png-652d05fcd1023ee100a7eac43a7445e5.stex
@@ -63,4 +69,3 @@ Main/.import/exp1.png-36d76b7579ba6ec25181da72974ed81d.stex
 Main/.import/exp1.png-36d76b7579ba6ec25181da72974ed81d.md5
 Main/.import/CanonBall.png-f1b15954275d5a4f106c0dae72306e05.stex
 Main/.import/CanonBall.png-f1b15954275d5a4f106c0dae72306e05.md5
-Main/default_env.tres
