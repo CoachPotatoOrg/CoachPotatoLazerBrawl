@@ -1,12 +1,165 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Player/PlayerShip.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Bullets/CannonBallP1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Resources/SpriteFrames/ShipSpriteFrames.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://GFX/Explosion/exp1.png" type="Texture" id=4]
+[ext_resource path="res://GFX/Explosion/exp2.png" type="Texture" id=5]
+[ext_resource path="res://GFX/Explosion/exp3.png" type="Texture" id=6]
+[ext_resource path="res://GFX/Explosion/exp4.png" type="Texture" id=7]
+[ext_resource path="res://GFX/Explosion/exp5.png" type="Texture" id=8]
+[ext_resource path="res://GFX/Explosion/exp6.png" type="Texture" id=9]
+[ext_resource path="res://GFX/Explosion/exp7.png" type="Texture" id=10]
+[ext_resource path="res://Audio/Guns n Explo/weapon_cannon_shot_04.wav" type="AudioStream" id=11]
+[ext_resource path="res://Scripts/Audio/Random_SFX.gd" type="Script" id=12]
+[ext_resource path="res://Audio/Guns n Explo/weapon_cannon_shot_01.wav" type="AudioStream" id=13]
+[ext_resource path="res://Audio/Guns n Explo/weapon_cannon_shot_02.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio/Guns n Explo/weapon_cannon_shot_03.wav" type="AudioStream" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
 height = 22.0
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "FireLeft"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FireBroadsideLeft/ShotsFired:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FireBroadsideLeft/ShotsFired:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FireBroadsideLeft/ShotsFired:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("ShotSFX")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_play_random_sfx"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "FireRight"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FireBroadsideRight/ShotsFired2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FireBroadsideRight/ShotsFired2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FireBroadsideRight/ShotsFired2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("ShotSFX")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_play_random_sfx"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FireBroadsideLeft/ShotsFired:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.99216 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FireBroadsideRight/ShotsFired2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.99216 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Player1Ship" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -21,25 +174,56 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="FireBroadsideLeft" type="Position2D" parent="."]
-modulate = Color( 0.0313726, 1, 0, 1 )
+self_modulate = Color( 0, 1, 0.156863, 1 )
 position = Vector2( 0, -14 )
 
 [node name="FireBroadsideLeftTarget" type="Position2D" parent="FireBroadsideLeft"]
 modulate = Color( 0.0313726, 1, 0, 1 )
 position = Vector2( 0, -10 )
 
+[node name="ShotsFired" type="AnimatedSprite" parent="FireBroadsideLeft"]
+visible = false
+position = Vector2( 12, -12 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
 [node name="FireBroadsideRight" type="Position2D" parent="."]
-modulate = Color( 0.0313726, 1, 0, 1 )
 position = Vector2( 0, 14 )
 
 [node name="FireBroadsideRightTarget" type="Position2D" parent="FireBroadsideRight"]
 modulate = Color( 0.0313726, 1, 0, 1 )
 position = Vector2( 0, 10 )
 
+[node name="ShotsFired2" type="AnimatedSprite" parent="FireBroadsideRight"]
+visible = false
+position = Vector2( 12, 10 )
+frames = SubResource( 2 )
+playing = true
+flip_v = true
+
 [node name="CooldownLeftSide" type="Timer" parent="."]
 one_shot = true
 
 [node name="CooldownRightSide" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/FireLeft = SubResource( 3 )
+anims/FireRight = SubResource( 4 )
+anims/default = SubResource( 5 )
+
+[node name="ShotSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+bus = "sfx"
+script = ExtResource( 12 )
+sfx_1 = ExtResource( 13 )
+sfx_2 = ExtResource( 14 )
+sfx_3 = ExtResource( 15 )
+sfx_4 = ExtResource( 11 )
+random_sfx_to_play = 4
+[connection signal="animation_finished" from="FireBroadsideLeft/ShotsFired" to="." method="_on_ShotsFired_animation_finished"]
+[connection signal="animation_finished" from="FireBroadsideRight/ShotsFired2" to="." method="_on_ShotsFired_animation_finished"]
 [connection signal="timeout" from="CooldownLeftSide" to="." method="_on_CooldownLeftSide_timeout"]
 [connection signal="timeout" from="CooldownRightSide" to="." method="_on_CooldownRightSide_timeout"]

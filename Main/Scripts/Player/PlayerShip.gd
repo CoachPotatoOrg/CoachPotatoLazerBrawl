@@ -54,6 +54,7 @@ func _input(event):
 
 
 func fire_cannon_left_side():
+	$AnimationPlayer.play("FireLeft")
 	can_fire_left = false
 	
 	var target = $FireBroadsideLeft/FireBroadsideLeftTarget.global_position
@@ -69,6 +70,7 @@ func fire_cannon_left_side():
 
 func fire_cannon_right_side():
 	can_fire_right = false
+	$AnimationPlayer.play("FireRight")
 	
 	var target = $FireBroadsideRight/FireBroadsideRightTarget.global_position
 	var cannon_ball_instance = standard_cannon_laser.instance()
@@ -89,3 +91,7 @@ func _on_CooldownLeftSide_timeout():
 func _on_CooldownRightSide_timeout():
 	can_fire_right = true
 	print("canfireleft", can_fire_right)
+
+
+func _on_ShotsFired_animation_finished():
+	pass # Replace with function body.
