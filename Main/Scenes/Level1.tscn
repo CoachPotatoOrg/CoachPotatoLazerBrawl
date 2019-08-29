@@ -72,3 +72,7 @@ collision_mask = 1
 speed = 200
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
+[connection signal="death" from="Player1Ship" to="." method="_on_Player1Ship_death"]
+[connection signal="death" from="Player2Ship" to="." method="_on_Player2Ship_death"]
+
+[editable path="HUD"]
