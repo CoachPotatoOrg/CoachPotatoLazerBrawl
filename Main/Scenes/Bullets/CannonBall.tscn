@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Scripts/Player/CannonBall.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/fx/BulletFxHit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://GFX/Placeholder/laser2.png" type="Texture" id=3]
+[ext_resource path="res://GFX/CanonBall.png" type="Texture" id=3]
 [ext_resource path="res://GFX/Lights/Small_Particle_light.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13, 2 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.0
 
 [node name="CannonBall" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -20,4 +20,5 @@ texture = ExtResource( 4 )
 color = Color( 1, 0, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
