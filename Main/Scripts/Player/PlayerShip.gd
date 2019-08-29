@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var player_id = 1
 
-export var ship_health = 100
+export var health = 100
 
 export (int) var speed = 200
 export (float) var acceleration = 0.5
@@ -18,13 +18,23 @@ var motion = Vector2()
 var velocity = Vector2()
 var rotation_dir = 0
 
-var friction = 0.2
+var loose_friction = true
 
 onready var broadside_left = $FireBroadsideLeft
 onready var broadside_right = $FireBroadsideRight
 
 var can_fire_left = true
 var can_fire_right = true
+
+var has_input = true
+
+
+func _ready():
+	if player_id == 1:
+		Global.player_1 = self
+	else:
+		Global.player_2 = self
+
 
 func get_movement_input():
     rotation_dir = 0
@@ -40,18 +50,22 @@ func get_movement_input():
 
 
 func _physics_process(delta):
-    get_movement_input()
-    rotation += rotation_dir * rotation_speed * delta
-    motion = move_and_slide(motion)
+	if has_input:
+			get_movement_input()
+			rotation += rotation_dir * rotation_speed * delta
+			motion = move_and_slide(motion)
+	if loose_friction:
+		motion.x = lerp(motion.x, 0, 0.8)
 
 
 func _input(event):
-	if Input.is_action_just_pressed("fire_leftP%s" % player_id):
-		if can_fire_left:
-			fire_cannon_left_side()
-	if Input.is_action_just_pressed("fire_rightP%s" % player_id):
-		if can_fire_right:
-			fire_cannon_right_side()
+	if has_input:
+		if Input.is_action_just_pressed("fire_leftP%s" % player_id):
+			if can_fire_left:
+				fire_cannon_left_side()
+		if Input.is_action_just_pressed("fire_rightP%s" % player_id):
+			if can_fire_right:
+				fire_cannon_right_side()
 
 
 func fire_cannon_left_side():
@@ -96,3 +110,14 @@ func _on_CooldownRightSide_timeout():
 	print("canfireleft", can_fire_right)
 
 
+func take_damage(damage_to_take):
+	health -= damage_to_take
+	if health <= 0:
+		destroy()
+		health = 0
+	Global.HUD.update_hud()
+
+
+func destroy():
+	has_input = false
+	$ShipAnims.play("death")
