@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 export var damage = 10
+export var launch_speed = 300
+
+export(float) var _speed
 
 var bounces = 0
 export var bounce_limit = 2
@@ -20,31 +23,24 @@ func launch(launch_X,launch_Y):
 	motion.y = launch_Y
 
 
-func check_bounces():
-	if ricochet:
-		if bounces >= bounce_limit:
-			queue_free()
-	else:
-		queue_free()
-
-
 func _physics_process(delta):
 	collision_info = move_and_collide(motion * delta)
 	if collision_info:
-		ricochet = false
-		randomize()
-		var dice_roll = randi() % 8
-		if dice_roll >= 7:
-			motion = motion.bounce(collision_info.normal)
-			look_at(motion)
-			bounces += 1
-			add_to_group("enemy")
-			ricochet = true
+#		ricochet = false
+#		randomize()
+#		var dice_roll = randi() % 8
+#		if dice_roll >= 7:
+#			motion = motion.bounce(collision_info.normal)
+#			look_at(motion)
+#			bounces += 1
+#			add_to_group("enemy")
+#			ricochet = true
+		
 		collider = collision_info.collider
 		collision_point = collision_info.normal
 		create_explosion(collision_point)
 		if collider != null:
-			if collider.is_in_group("enemy"):
+			if collider.has_method("take_damage"):
 				print("boom")
 				collider.take_damage(damage)
 				print (collider.health)
@@ -57,5 +53,12 @@ func create_explosion(collision_point):
 	hit_explosion_instance.global_position = global_position
 	
 	Global.Level_Node.add_child(hit_explosion_instance)
-	hit_explosion_instance.check_impact_type(collider)
 	check_bounces()
+
+
+func check_bounces():
+	if ricochet:
+		if bounces >= bounce_limit:
+			queue_free()
+	else:
+		queue_free()

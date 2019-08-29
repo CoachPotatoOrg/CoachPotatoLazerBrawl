@@ -5,6 +5,8 @@
 [ext_resource path="res://Resources/SpriteFrames/Ship2SpriteFrames.tres" type="SpriteFrames" id=3]
 
 [node name="Player2Ship" instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 19
 player_id = 2
 standard_cannon_laser = ExtResource( 2 )
 
