@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
 [ext_resource path="res://GFX/StaticWater.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Player/PlayerShip.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Player/Player2Ship.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Blocks/BounceBlockTriangle.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 3.95408, 3.0238, 26.2806, 6.0472, 30.4668, 24.8852, 0.930695, 24.1875 )
@@ -69,9 +70,54 @@ position = Vector2( 64, 390 )
 position = Vector2( 448, 128 )
 collision_layer = 1
 collision_mask = 1
-speed = 200
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
+
+[node name="BounceBlocks" type="Node2D" parent="."]
+
+[node name="BounceBlockTriangle" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 32, 0 )
+rotation = 1.57079
+
+[node name="BounceBlockTriangle2" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 96, 160 )
+rotation = 4.71238
+
+[node name="BounceBlockTriangle3" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 448, 448 )
+rotation = 4.71238
+
+[node name="BounceBlockTriangle4" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 128, 416 )
+rotation = 6.28318
+
+[node name="BounceBlockTriangle5" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 160, 320 )
+rotation = 7.85397
+
+[node name="BounceBlockTriangle6" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 480, 352 )
+rotation = 9.42476
+
+[node name="BounceBlockTriangle7" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 480, 512 )
+rotation = 10.9956
+
+[node name="BounceBlockTriangle8" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 512, 32 )
+rotation = 9.42476
+
+[node name="BounceBlockTriangle9" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 0, 480 )
+rotation = 12.5664
+
+[node name="BounceBlockTriangle10" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 32, 192 )
+rotation = 14.1371
+
+[node name="BounceBlockTriangle11" parent="BounceBlocks" instance=ExtResource( 8 )]
+position = Vector2( 352, 512 )
+rotation = 17.2787
 [connection signal="death" from="Player1Ship" to="." method="_on_Player1Ship_death"]
 [connection signal="death" from="Player2Ship" to="." method="_on_Player2Ship_death"]
 

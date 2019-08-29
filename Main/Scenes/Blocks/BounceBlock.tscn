@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Shader/DistortionFXRadialGradient.shader" type="Shader" id=1]
+[ext_resource path="res://Shader/gltichTextureCircle.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.0
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/displacementAmount = 0.059
+shader_param/abberationAmount = 0.038
+shader_param/abberationAmountX = -0.005
+shader_param/abberationAmountY = 0.007
+shader_param/dispSize = 1.034
+shader_param/maxAlpha = 0.524
+shader_param/effect_color = Color( 0, 0, 0, 0 )
+shader_param/radius = 0.451
+shader_param/width = 0.056
+shader_param/displace = ExtResource( 2 )
+
+[node name="BounceBlock" type="Node2D" groups=[
+"bounceblock",
+]]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"bounceblock",
+]]
+collision_layer = 8
+collision_mask = 48
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 16, 17 )
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_right = 32.0
+margin_bottom = 34.0

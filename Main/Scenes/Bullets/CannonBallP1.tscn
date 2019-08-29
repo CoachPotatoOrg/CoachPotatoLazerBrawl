@@ -5,3 +5,4 @@
 [node name="CannonBallP1" instance=ExtResource( 1 )]
 collision_layer = 16
 collision_mask = 5
+damage = 35

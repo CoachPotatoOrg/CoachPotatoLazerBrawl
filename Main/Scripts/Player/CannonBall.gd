@@ -7,7 +7,6 @@ export(float) var _speed
 
 var bounces = 0
 export var bounce_limit = 2
-var ricochet = false
 
 var motion = Vector2()
 
@@ -38,12 +37,20 @@ func _physics_process(delta):
 		
 		collider = collision_info.collider
 		collision_point = collision_info.normal
-		create_explosion(collision_point)
 		if collider != null:
+			if collider.is_in_group("bounceblock"):
+				motion = motion.bounce(collision_info.normal)
+				look_at(motion)
+				bounces += 1
+				print("bounce")
+			else:
+				bounces = bounce_limit
 			if collider.has_method("take_damage"):
 				print("boom")
 				collider.take_damage(damage)
 				print (collider.health)
+#				add_to_group("enemy")
+		create_explosion(collision_point)
 
 
 func create_explosion(collision_point):
@@ -57,8 +64,5 @@ func create_explosion(collision_point):
 
 
 func check_bounces():
-	if ricochet:
-		if bounces >= bounce_limit:
-			queue_free()
-	else:
+	if bounces >= bounce_limit:
 		queue_free()
