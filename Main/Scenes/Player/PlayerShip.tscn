@@ -16,4 +16,10 @@ frames = ExtResource( 2 )
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
-[node name="Position2D" type="Position2D" parent="."]
+[node name="FireBroadsideLeft" type="Position2D" parent="."]
+modulate = Color( 0.0313726, 1, 0, 1 )
+position = Vector2( 16, 0 )
+
+[node name="FireBroadsideRight" type="Position2D" parent="."]
+modulate = Color( 0.0313726, 1, 0, 1 )
+position = Vector2( -16, 0 )
